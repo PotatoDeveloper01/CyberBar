@@ -1,0 +1,826 @@
+/* ==========================================================================
+   CYBERBAR SIMULATOR v5.0 - style.css
+   ========================================================================== */
+
+/* --- CSS Variables --- */
+:root {
+    /* Colors */
+    --neon-pink: #ff00ff;
+    --neon-cyan: #00ffff;
+    --neon-green: #39ff14;
+    --neon-blue: #0077ff;
+    --neon-orange: #ff8c00;
+    --neon-yellow: #fff000;
+
+    --dark-bg: #0d0221;
+    --light-purple: rgba(42, 27, 61, 0.95); /* Slightly more opaque for better readability */
+    --mid-purple: rgba(26, 15, 41, 0.95);   /* Slightly more opaque */
+    --text-color: #f0f0f0;
+    --disabled-color: #555;
+    --vip-color: var(--neon-yellow);
+    --loading-text-color: var(--neon-blue); /* Color for loading messages */
+
+    /* Ingredient Colors (Ensure these match JS) */
+    --color-ice: #e0f8ff;
+    --color-synth_gin: #a0d2eb;
+    --color-pixel_vodka: #f5f5f5;
+    --color-laser_lime: #90ee90;
+    --color-cosmic_cranberry: #dc143c;
+    --color-glitter_tonic: #d3d3d3;
+    --color-plasma_orange: #ffa500;
+    --color-nebula_nectar: #8a2be2;
+    --color-turbo_rum: #a0522d;
+    --color-quantum_cola: #3a2d2d;
+    --color-holo_mint: #40e0d0;
+    --color-star_syrup: #ffd700;
+    --color-cryo_cherry: #ff6b6b;
+    --color-bit_lemon: #fffacd;
+    --color-void_essence: #4b0082;
+    --color-flux_foam: #f0fff0;
+    --color-chrono_cordial: #dda0dd;
+    --color-plasma_berry: #c71585;
+    --color-static_sugar: #fafad2;
+    --color-gravity_gin: #6a0dad;
+
+    /* Glows */
+    --border-glow: 0 0 8px var(--neon-cyan), 0 0 15px var(--neon-cyan), 0 0 25px var(--neon-cyan); /* Slightly enhanced glow */
+    --text-glow-pink: 0 0 4px var(--neon-pink), 0 0 7px var(--neon-pink);
+    --text-glow-cyan: 0 0 4px var(--neon-cyan), 0 0 7px var(--neon-cyan);
+    --text-glow-green: 0 0 4px var(--neon-green), 0 0 7px var(--neon-green);
+    --text-glow-orange: 0 0 4px var(--neon-orange), 0 0 7px var(--neon-orange);
+    --text-glow-yellow: 0 0 4px var(--neon-yellow), 0 0 7px var(--neon-yellow);
+    --vip-glow: 0 0 10px var(--vip-color), 0 0 20px var(--vip-color), 0 0 30px var(--vip-color);
+
+    /* Sizes */
+    --drink-icon-size: 32px;
+    --customer-icon-size: 80px;
+    --emotion-icon-size: 40px;
+    --mixing-station-image-height: 100px; /* Height for the mixer image itself */
+    --draggable-ingredient-width: 60px;  /* For rectangular ingredients */
+    --draggable-ingredient-height: 40px; /* For rectangular ingredients */
+
+    /* Image URLs (from your JS, ensure these are correct) */
+    --happy-emotion-url: url('https://media-hosting.imagekit.io/4498ab57bfb74d5f/image-removebg-preview%20(7).png?Expires=1841099985&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=bTqaNDxxLRwOwqMuH8KP5e0Gx8UhQEyLQ-M-OutT96l4DAU23UPSFuWddafKhcKHpFeDG-aZMASnSxnNagtMZF2Ue-XzR8NtvOxTVyxgevFqIlgLXLlP4iRQXc8REblUN4OaTuysN4pdjgGV8YdcgmIak32QvukOWj90bPytacqdDgUpFD~dPCP6FtUuv8rzMORh~BVgKku5ctRBmNQf1ju~yzzNGdcJYp6cOg1bayO090bzRFdWRr-rhN9nI-ynxnILXVZv7bijC47LlyLar2WvF-Vug9jwnhgwRh7AiyXX8RlytEMNgB8rY57J6x0CKOpsvIYfWqJ-CocsjyFRIw__');
+    --angry-emotion-url: url('https://media-hosting.imagekit.io/4a748e86543b41ad/image-removebg-preview%20(6).png?Expires=1841099985&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=TLFHQkck~GiOJmrYznAJkbBvsxBHPN63q8PmGcDSiXWnax~EpJpp5M7CN~fnm7xXHVeG9kpDtOU7epcCQuEnMqpXZGeBY3Vv8ok8YVIjBUh~AxsKwQDrpAaVu8kYofCG3ffgIJJEaFglbb1MJ2w8TECVf55PGBiTE4mQ2as-jocjrIkkdIWWVUmQ6RCSrWd8w6WkcwD4xaokPC4UGoZK5YWHPplZwWYnPnP2XlJ6R9rkWAbw5n~IJVzaTb7d2CwzxWsWaANVb198kjP4Ux0284bED5PZdIRGQfpcQ2O4l-wDFrd9d1AnGbIGD6V1rs-E6ZcLzrzYZlVfj8dducMUng__');
+    --mixing-station-url: url('https://media-hosting.imagekit.io/8bb5a0f1e39941f7/download%20(30).png?Expires=1841100148&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=MLsno4Cjan1uIRYmhXe~zGuS0ihHM6plDRHqXSzvhpAncrr-ecUATG6JN7ZcsDi4blioZPKIWpiD5PW1KazTNNmqJkfEvwqQC1oloBUMf8nHws2DtQan5g2Ic81GfkRsDoxxAMMJKcp3AAYiIykg6AVKYEGv4hL8qzZw3ECpYevzkn~VKauxBP8jCxG6GGZIMNDE0AtfHQX1Pzz5TC34RK8AnvVBqFxfSnhkfnr-ZiUdMtJRStnxWdb9fE2qWuKUg2-u7wL~nX~pSXwgFVlGmyFIyOce2G0K6~hEeTug8uXuRC8lPnKX6EuW2rEGRZ0YqIomuu2U5Y33Wntg8cph7Q__');
+    --background-url: url('https://videos.openai.com/vg-assets/assets%2Ftask_01jtgh5mjpfh6vdzmq8c9w01xj%2F1746459192_img_0.webp?st=2025-05-05T14%3A02%3A33Z&se=2025-05-11T15%3A02%3A33Z&sks=b&skt=2025-05-05T14%3A02%3A33Z&ske=2025-05-11T15%3A02%3A33Z&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skoid=3d249c53-07fa-4ba4-9b65-0bf8eb4ea46a&skv=2019-02-02&sv=2018-11-09&sr=b&sp=r&spr=https%2Chttp&sig=uuPGJMm9RkdrsxB5FI5p1hjIkfJ0uEGH2Q3FKD63NXU%3D&az=oaivgprodscus');
+    --chat-bubble-border-color: var(--neon-green); /* Default chat bubble pointer color */
+}
+
+/* --- Basic Reset & Body Styling --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px; /* Base font size for rem units */
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--text-color);
+    background-image: var(--background-url);
+    background-color: var(--dark-bg); /* Fallback */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top for scrollable content */
+    min-height: 100vh;
+    padding: 1.5rem; /* Increased padding for better spacing */
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before { /* Darkening overlay for better foreground contrast */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(13, 2, 33, 0.75); /* Slightly darker overlay */
+    z-index: -1; /* Behind all content */
+}
+
+#game-wrapper {
+    width: 100%;
+    max-width: 1280px; /* Slightly wider for more space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1; /* Above body overlay */
+    gap: 1.5rem; /* Space between title, header, and game container */
+}
+
+/* --- General UI Elements & Headings --- */
+#main-title {
+    color: var(--neon-pink);
+    text-shadow: var(--text-glow-pink);
+    font-size: 2rem; /* Slightly larger title */
+    margin-bottom: 0; /* Adjusted by game-wrapper gap */
+    width: 100%;
+    text-align: center;
+}
+
+h2 { /* Panel Titles */
+    color: var(--neon-cyan);
+    text-shadow: var(--text-glow-cyan);
+    font-size: 1.3rem; /* Slightly larger panel titles */
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+h3 { /* Section Subtitles */
+    color: var(--neon-green);
+    text-shadow: var(--text-glow-green);
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 0.75rem; /* Consistent subtitle spacing */
+    text-align: center;
+}
+
+/* --- Header Area --- */
+#header-area {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem; /* Increased padding */
+    background-color: var(--mid-purple);
+    border: 2px solid var(--neon-blue);
+    border-radius: 12px; /* Slightly more rounded */
+    color: var(--neon-cyan);
+    text-shadow: var(--text-glow-cyan);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    gap: 1rem; /* Increased gap */
+}
+
+#game-time, #game-day {
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+#open-close-sign {
+    padding: 0.5rem 1rem; /* Larger click area */
+    border: 2px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+    white-space: nowrap;
+    font-family: 'Press Start 2P', cursive;
+}
+#open-close-sign.open {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green); /* Enhanced glow */
+    text-shadow: var(--text-glow-green);
+    background-color: rgba(57, 255, 20, 0.15);
+}
+#open-close-sign.closed {
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 8px var(--neon-pink); /* Enhanced glow */
+    text-shadow: var(--text-glow-pink);
+    background-color: rgba(255, 0, 255, 0.15);
+}
+#open-close-sign:hover:not(:disabled) {
+    transform: scale(1.05) translateY(-1px); /* More noticeable hover */
+    filter: brightness(1.25);
+}
+#open-close-sign:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: var(--disabled-color);
+    color: var(--disabled-color);
+    box-shadow: none;
+    text-shadow: none;
+    background-color: rgba(85, 85, 85, 0.2);
+}
+
+/* --- Main Game Container & Panels --- */
+#game-container {
+    background-color: var(--light-purple);
+    border: 3px solid var(--neon-cyan);
+    box-shadow: var(--border-glow);
+    padding: 1.5rem; /* Increased padding */
+    border-radius: 20px; /* More rounded */
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 1.5rem; /* Increased gap */
+    flex-wrap: wrap;
+}
+
+#left-panel, #middle-panel, #right-panel {
+    padding: 1.2rem; /* Increased padding */
+    border: 2px solid var(--neon-blue);
+    border-radius: 15px; /* More rounded */
+    background-color: var(--mid-purple);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Consistent gap between direct children of panels */
+}
+
+#left-panel { flex: 1 1 260px; min-width: 240px; }
+#middle-panel { flex: 2 1 400px; min-width: 350px; }
+#right-panel { flex: 1 1 280px; min-width: 260px; }
+
+/* Utility class for loading messages */
+.loading-message {
+    color: var(--loading-text-color);
+    text-shadow: 0 0 3px var(--loading-text-color);
+    font-style: italic;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.85rem;
+}
+
+/* --- Left Panel: Customer Info, Queue, Stats --- */
+.panel-header { /* For Customer Info H2 and Queue Toggle Button */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0; /* Handled by panel gap */
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.panel-header h2 { margin-bottom: 0; } /* Remove bottom margin from h2 inside panel-header */
+
+#queue-toggle-btn {
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    padding: 0.4rem 0.6rem; /* Slightly adjusted */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem; /* Slightly larger */
+    text-shadow: var(--text-glow-cyan);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+#queue-toggle-btn:hover {
+    background-color: var(--neon-cyan);
+    color: var(--dark-bg);
+    box-shadow: var(--border-glow);
+    transform: scale(1.05);
+}
+
+#queue-section {
+    padding: 0.8rem;
+    border: 1px dashed var(--neon-blue);
+    border-radius: 10px; /* Consistent rounding */
+    background-color: rgba(0,0,0,0.2); /* Slightly more pronounced background */
+}
+#queue-section h3 { /* "Waiting Customers" heading */
+    font-size: 0.9rem;
+    color: var(--neon-orange);
+    text-shadow: var(--text-glow-orange);
+    margin-bottom: 0.75rem;
+}
+#queue-list {
+    max-height: 180px; /* Adjusted height */
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Slightly increased gap */
+}
+.queue-customer-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Increased gap */
+    background-color: rgba(13, 2, 33, 0.6);
+    padding: 0.7rem; /* Increased padding */
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    font-size: 0.8rem; /* Slightly larger text */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.queue-customer-item:hover {
+    background-color: rgba(42, 27, 61, 0.8);
+    border-color: var(--neon-cyan);
+}
+.queue-customer-icon {
+    width: 36px; /* Slightly larger */
+    height: 36px;
+    object-fit: contain;
+    border-radius: 5px;
+    image-rendering: pixelated;
+    background-color: rgba(0,0,0,0.4);
+    flex-shrink: 0;
+}
+.queue-customer-item.vip .queue-customer-icon {
+    border: 2px solid var(--vip-color);
+    box-shadow: var(--vip-glow);
+}
+.queue-customer-name {
+    flex-grow: 1;
+    color: var(--text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.queue-customer-item.vip .queue-customer-name {
+    color: var(--vip-color);
+    font-weight: bold;
+    text-shadow: 0 0 3px var(--vip-color); /* Add subtle glow for VIP name */
+}
+.queue-customer-actions {
+    display: flex;
+    gap: 0.5rem; /* Increased gap */
+    flex-shrink: 0;
+}
+.queue-bio-btn, .queue-ask-btn {
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--mid-purple);
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    padding: 0.3rem 0.6rem; /* Adjusted */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.7rem; /* Adjusted */
+    transition: all 0.2s ease;
+    box-shadow: 0 0 4px var(--neon-cyan); /* Adjusted glow */
+}
+.queue-bio-btn:hover, .queue-ask-btn:hover {
+    background-color: var(--neon-cyan);
+    color: var(--dark-bg);
+    box-shadow: 0 0 6px var(--neon-cyan), 0 0 10px var(--neon-cyan); /* Enhanced glow */
+    transform: translateY(-1px);
+}
+.queue-bio-btn:disabled, .queue-ask-btn:disabled {
+    background-color: var(--disabled-color); color: #999; border-color: #444;
+    cursor: not-allowed; box-shadow: none; opacity: 0.7;
+}
+
+#customer-area {
+    text-align: center;
+    position: relative;
+    min-height: calc(var(--customer-icon-size) + 1rem);
+    /* margin-bottom: 1.5rem; Removed, handled by panel gap */
+}
+#customer-icon {
+    width: var(--customer-icon-size); height: var(--customer-icon-size);
+    margin: 0.5rem auto; display: block; border-radius: 12px; /* More rounded */
+    object-fit: contain; image-rendering: pixelated; border: 3px solid transparent;
+    transition: border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    background-color: rgba(0,0,0,0.35); /* Slightly darker placeholder */
+}
+#customer-icon.vip { border-color: var(--vip-color); box-shadow: var(--vip-glow); }
+
+#emotion-popup {
+    position: absolute; top: -0.5rem; left: 50%;
+    transform: translateX(-50%); width: var(--emotion-icon-size); height: var(--emotion-icon-size);
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    opacity: 0; transition: opacity 0.3s ease, transform 0.2s ease;
+    pointer-events: none; z-index: 10; image-rendering: pixelated;
+}
+#emotion-popup.visible { opacity: 1; transform: translateX(-50%) scale(1.15); } /* Slightly more pop */
+#emotion-popup.happy { background-image: var(--happy-emotion-url); }
+#emotion-popup.angry { background-image: var(--angry-emotion-url); }
+
+@keyframes shakeHappy {
+    0%, 100% { transform: translateX(0) rotate(0); } 25% { transform: translateX(-5px) rotate(-4deg); }
+    50% { transform: translateX(5px) rotate(4deg); } 75% { transform: translateX(-3px) rotate(-2deg); }
+}
+@keyframes bounceAngry {
+    0%, 100% { transform: translateY(0); } 20%, 60% { transform: translateY(-10px); } /* More bounce */
+    40%, 80% { transform: translateY(3px); }
+}
+#customer-icon.happy { animation: shakeHappy 0.65s ease-in-out; } /* Slightly adjusted timing */
+#customer-icon.angry { animation: bounceAngry 0.55s ease-in-out; }
+
+#chat-bubble {
+    background-color: var(--dark-bg); border: 2px solid var(--chat-bubble-border-color);
+    padding: 1rem; /* Increased padding */ border-radius: 12px; /* More rounded */
+    margin-top: 1rem; /* Consistent spacing */ position: relative; min-height: 4.5em; /* Slightly taller */
+    display: flex; justify-content: center; align-items: center;
+    color: var(--chat-bubble-border-color);
+    text-shadow: var(--text-glow-green); /* Default, JS overrides for VIP */
+    font-size: 0.85rem; /* Slightly larger */ line-height: 1.5; /* Improved readability */
+    transition: border-color 0.3s ease, color 0.3s ease, text-shadow 0.3s ease, var(--chat-bubble-border-color) 0.3s ease;
+}
+#chat-bubble::before {
+    content: ""; position: absolute; bottom: 100%; left: 50%;
+    transform: translateX(-50%); border-width: 12px; /* Slightly larger pointer */ border-style: solid;
+    border-color: transparent transparent var(--chat-bubble-border-color) transparent;
+    transition: border-color 0.3s ease;
+}
+#chat-bubble::after {
+    content: ""; position: absolute; bottom: 100%; left: 50%;
+    transform: translateX(-50%); border-width: 10px; /* Adjusted inner pointer */ border-style: solid;
+    border-color: transparent transparent var(--dark-bg) transparent;
+    margin-bottom: -2px; /* Maintain overlap */
+}
+
+#stats-area {
+    margin-top: auto; padding-top: 1.2rem; /* Increased padding */
+    border-top: 2px dashed var(--neon-blue); /* Thicker dash */
+}
+#score, #money, #timer-display {
+    font-size: 0.95rem; /* Slightly larger */ margin-bottom: 0.7rem; /* Increased spacing */
+    color: var(--neon-pink); text-shadow: var(--text-glow-pink);
+}
+#timer-display { color: var(--neon-orange); text-shadow: var(--text-glow-orange); font-weight: bold; }
+#skill-level-display, #upgrade-level-display {
+    font-size: 0.75rem; /* Slightly larger */ margin-top: 0.5rem; line-height: 1.4; /* Improved readability */
+}
+#skill-level-display { color: var(--neon-cyan); }
+#upgrade-level-display { color: var(--neon-orange); }
+
+/* --- Middle Panel: Ingredients, Mixing, Actions, Feedback --- */
+.ingredients-section, .mixing-section, .feedback-section {
+    /* These are new wrapper classes from HTML for structure */
+    /* Add specific styles if needed, e.g., margin-bottom */
+    margin-bottom: 1rem; /* Spacing between sections in middle panel */
+}
+.feedback-section { margin-bottom: 0; } /* No bottom margin for last section */
+.feedback-section h3 { margin-bottom: 0.5rem; }
+
+#ingredients { /* Container for draggable ingredients */
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.8rem; /* Increased gap */ padding: 0.8rem; /* Increased padding */
+    border: 1px dashed var(--neon-blue); border-radius: 10px;
+    min-height: 120px; /* Adjusted min height */
+    user-select: none;
+    background-color: rgba(0,0,0,0.1); /* Subtle background */
+}
+.ingredient-drag { /* Individual draggable ingredient - RECTANGULAR */
+    width: var(--draggable-ingredient-width);
+    height: var(--draggable-ingredient-height);
+    border: 2px solid; /* Color set by JS via --ingredient-color */
+    border-radius: 6px; /* Rounded rectangle */
+    display: flex; justify-content: center; align-items: center;
+    cursor: grab; font-size: 0.7rem; /* Adjusted font size */
+    text-align: center; line-height: 1.2; padding: 2px; /* Allow text to wrap slightly if needed */
+    background-color: var(--dark-bg);
+    transition: transform 0.15s ease-out, box-shadow 0.2s ease, opacity 0.2s ease;
+    -webkit-text-stroke: 1px var(--dark-bg); text-stroke: 1px var(--dark-bg);
+    paint-order: stroke fill; position: relative;
+    color: var(--text-color);
+    border-color: var(--ingredient-color, var(--neon-cyan));
+    text-shadow: 0 0 4px var(--ingredient-color, var(--neon-cyan)); /* Adjusted glow */
+    overflow: hidden; /* Ensure text doesn't overflow weirdly */
+}
+.ingredient-drag:active {
+    cursor: grabbing; transform: scale(1.1);
+    box-shadow: 0 0 12px var(--neon-yellow); /* Enhanced glow */
+    z-index: 100;
+}
+
+#mixing-station { /* Parent, drop-zone, border */
+    width: 100%; max-width: 280px; /* Slightly wider */
+    height: calc(var(--mixing-station-image-height) + 2rem); /* Accommodate image and some padding for items */
+    border: 3px dashed var(--neon-blue);
+    border-radius: 12px;
+    margin: 0 auto 1rem auto; /* Centered, spacing below */
+    position: relative; /* For absolute positioning of image and ingredients display */
+    transition: border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Important for containing absolutely positioned children */
+}
+#mixer-image-visual { /* Child, gets PNG background and shakes */
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); /* Center the image */
+    width: 80%; /* Adjust to fit well within padding */
+    height: var(--mixing-station-image-height);
+    background-image: var(--mixing-station-url);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1; /* Behind ingredients */
+    /* Transitions for visual effects if needed, separate from shake animation */
+    transition: transform 0.2s ease;
+}
+#mixed-ingredients-display { /* Container for mixed ingredient spans */
+    position: relative; /* So it sits on top of the absolute image */
+    z-index: 2; /* Above mixer image */
+    width: 100%; height: 100%; /* Fill the parent #mixing-station */
+    display: flex; flex-wrap: wrap;
+    gap: 0.5rem; /* Increased gap */
+    justify-content: center;
+    align-content: flex-start; /* Align items at the top */
+    padding: 0.8rem; /* Increased padding, ensure it doesn't overlap border too much */
+    overflow-y: auto; /* Scroll if many ingredients */
+}
+.mixed-ingredient { /* Individual ingredient span in the mixer */
+    background-color: var(--ingredient-color, var(--neon-green));
+    color: var(--dark-bg);
+    padding: 4px 8px; /* Increased padding */
+    border-radius: 5px; /* Consistent rounding */
+    font-size: 0.75rem; /* Slightly larger */
+    display: inline-flex; align-items: center; gap: 5px; /* Increased gap */
+    border: 1px solid rgba(0,0,0,0.6); /* Darker border for contrast */
+    flex-shrink: 0; text-shadow: none;
+}
+#mixing-station.drag-over { /* Highlight for drop zone */
+    border-color: var(--neon-green) !important;
+    /* transform: scale(1.02); No longer scale the whole box */
+    box-shadow: 0 0 12px var(--neon-green);
+}
+/* Apply shake animations to #mixer-image-visual */
+#mixer-image-visual.mixing-gentle { animation: mix-gentle 0.6s ease-in-out; }
+#mixer-image-visual.mixing-shake { animation: mix-shake-rotate 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+/* Keep original keyframes for mix-gentle and mix-shake-rotate */
+@keyframes mix-gentle {
+    10%, 90% { transform: translate(-50%, -50%) translateX(-3px); } /* Keep centering transform */
+    20%, 80% { transform: translate(-50%, -50%) translateX(3px); }
+    30%, 50%, 70% { transform: translate(-50%, -50%) translateX(-5px); }
+    40%, 60% { transform: translate(-50%, -50%) translateX(5px); }
+    0%, 100% { transform: translate(-50%, -50%) translateX(0px); } /* Ensure it returns to center */
+}
+@keyframes mix-shake-rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg) translateX(0); }
+    10%, 90% { transform: translate(-50%, -50%) rotate(-15deg) translateX(-5px); }
+    20%, 80% { transform: translate(-50%, -50%) rotate(15deg) translateX(5px); }
+    30%, 50%, 70% { transform: translate(-50%, -50%) rotate(-20deg) translateX(-8px); }
+    40%, 60% { transform: translate(-50%, -50%) rotate(20deg) translateX(8px); }
+    100% { transform: translate(-50%, -50%) rotate(0deg) translateX(0); }
+}
+
+
+#actions { /* Container for action buttons */
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 1rem; /* Increased gap */
+    margin-top: 1rem; /* Consistent spacing */
+}
+.action-btn {
+    font-family: 'Press Start 2P', cursive; background-color: var(--dark-bg);
+    color: var(--neon-cyan); border: 2px solid var(--neon-cyan);
+    padding: 0.7rem 1.2rem; /* Increased padding */ border-radius: 10px; /* More rounded */
+    cursor: pointer; transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 6px var(--neon-cyan); /* Adjusted glow */ font-size: 0.85rem; /* Slightly larger */
+}
+.action-btn:hover:not(:disabled) {
+    background-color: var(--neon-cyan); color: var(--dark-bg);
+    box-shadow: var(--border-glow); transform: translateY(-2px) scale(1.03); /* Enhanced hover */
+}
+.action-btn:active:not(:disabled) { transform: scale(0.96) translateY(0); } /* Adjusted active state */
+.action-btn:disabled {
+    background-color: var(--disabled-color); color: #888; /* Lighter disabled text */
+    border-color: #444; cursor: not-allowed; box-shadow: none; opacity: 0.65; /* Slightly more opaque */
+}
+#shake-btn { color: var(--neon-orange); border-color: var(--neon-orange); box-shadow: 0 0 6px var(--neon-orange); }
+#shake-btn:hover:not(:disabled) { background-color: var(--neon-orange); color: var(--dark-bg); box-shadow: 0 0 10px var(--neon-orange), 0 0 18px var(--neon-orange); }
+#serve-btn { color: var(--neon-green); border-color: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); }
+#serve-btn:hover:not(:disabled) { background-color: var(--neon-green); color: var(--dark-bg); box-shadow: 0 0 10px var(--neon-green), 0 0 18px var(--neon-green); }
+
+#message-box { /* Game feedback messages */
+    min-height: 2em; /* Ensure space for two lines */
+    font-size: 0.9rem; font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding: 0.5rem; /* Add some padding */
+    text-align: center; /* Center feedback text */
+    line-height: 1.4;
+}
+
+/* --- Right Panel: Tabs --- */
+#tab-buttons {
+    display: flex; flex-wrap: wrap; gap: 6px; /* Increased gap */
+    margin-bottom: 1rem; /* Consistent spacing */
+    border-bottom: 3px solid var(--neon-blue); /* Thicker border */
+    padding-bottom: 1rem;
+}
+.tab-btn {
+    font-family: 'Press Start 2P', cursive; background-color: var(--mid-purple);
+    color: var(--neon-blue); border: 1px solid var(--neon-blue);
+    padding: 0.6rem 0.8rem; /* Increased padding */ border-radius: 8px 8px 0 0; /* More rounded top */
+    cursor: pointer; font-size: 0.75rem; /* Slightly larger */ flex-grow: 1; text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; /* Added box-shadow transition */
+    border-bottom: none;
+    text-shadow: 0 0 3px var(--neon-blue); /* Subtle glow for inactive */
+}
+.tab-btn.active {
+    background-color: var(--neon-blue); color: var(--dark-bg); font-weight: bold;
+    border-color: var(--neon-blue); position: relative; top: 2px; /* Align with thicker border */
+    box-shadow: 0 0 8px var(--neon-blue); /* Glow for active tab */
+    text-shadow: none; /* Remove glow from text for active */
+}
+.tab-btn:hover:not(.active) {
+    background-color: var(--light-purple); filter: brightness(1.15);
+    color: var(--neon-cyan); border-color: var(--neon-cyan); /* Change border on hover */
+    text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+#tab-content-area {
+    flex-grow: 1; position: relative; min-height: 320px; /* Slightly taller */
+}
+.tab-content {
+    display: none; overflow-y: auto; position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 0.8rem; /* Increased padding, removed specific right padding */
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.1); /* Subtle background for content area */
+    border-radius: 0 0 10px 10px; /* Round bottom corners if desired */
+}
+.tab-content.active { display: block; z-index: 1; }
+
+/* Styling within tab content (list items for recipes, unlocks, etc.) */
+.list-item {
+    background-color: rgba(0,0,0,0.25); /* Slightly darker item background */
+    border: 1px solid var(--neon-blue); border-radius: 8px; /* More rounded */
+    padding: 1rem; /* Increased padding */ margin-bottom: 1rem; /* Increased spacing */
+    font-size: 0.8rem; /* Slightly larger base font */
+    display: flex; flex-direction: column; gap: 0.6rem; /* Increased gap */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+.list-item:last-child { margin-bottom: 0; }
+
+.list-item h4 { /* Drink/Upgrade/Skill Name */
+    color: var(--neon-cyan); margin: 0 0 0.5rem 0; font-size: 1rem; /* Slightly larger */
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; /* Increased gap */
+    border-bottom: 1px dashed rgba(0, 255, 255, 0.3); /* Subtle separator */
+    padding-bottom: 0.5rem;
+}
+.list-item h4 .drink-name { flex-grow: 1; word-break: break-word; }
+.list-item p { margin: 0 0 0.3rem 0; line-height: 1.5; } /* Improved readability */
+.list-item ul { list-style: none; padding-left: 0.5rem; margin: 0.4rem 0; color: var(--text-color); }
+.list-item ul li { margin-bottom: 0.3rem; position: relative; padding-left: 1rem; }
+.list-item ul li::before { /* Custom bullet */
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--neon-green);
+    font-size: 0.8em;
+}
+
+.shake-indicator, .age-indicator { /* For drinks needing shake or aging */
+    color: var(--neon-orange); font-weight: bold; display: block;
+    margin-top: 0.5rem; font-size: 0.9em;
+    text-shadow: var(--text-glow-orange);
+}
+.cost { color: var(--neon-yellow); font-weight: bold; white-space: nowrap; text-shadow: var(--text-glow-yellow); }
+.level { color: var(--neon-green); white-space: nowrap; text-shadow: var(--text-glow-green); }
+
+.buy-btn { /* Buttons in tabs (Unlock, Upgrade) */
+    margin-top: 0.8rem; background-color: var(--neon-green); color: var(--dark-bg);
+    border: 2px solid var(--neon-green); /* Thicker border */
+    padding: 0.6rem 1rem; /* Adjusted padding */ font-size: 0.8rem; /* Adjusted font */
+    align-self: flex-start; font-family: 'Press Start 2P', cursive;
+    border-radius: 8px; /* More rounded */ cursor: pointer; transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 5px var(--neon-green);
+}
+.buy-btn:disabled {
+    background-color: var(--disabled-color); color: #888; border-color: #444;
+    cursor: not-allowed; box-shadow: none; opacity: 0.65;
+}
+.buy-btn.maxed {
+    background-color: var(--neon-blue); color: var(--dark-bg); border-color: var(--neon-blue);
+    cursor: default; box-shadow: 0 0 5px var(--neon-blue);
+}
+.buy-btn:hover:not(:disabled):not(.maxed) {
+    background-color: var(--dark-bg); color: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green), 0 0 18px var(--neon-green); /* Enhanced glow */
+    transform: translateY(-2px) scale(1.03);
+}
+.buy-btn:active:not(:disabled):not(.maxed) { transform: scale(0.97) translateY(0); }
+
+.drink-icon { /* Icons for drinks in lists */
+    width: var(--drink-icon-size); height: var(--drink-icon-size);
+    display: inline-block; vertical-align: middle; image-rendering: pixelated;
+    flex-shrink: 0; object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.12); /* Slightly more visible placeholder */
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.2); /* Subtle border for icon */
+}
+
+/* Review Specific Styles */
+#reviews-content .list-item {
+    border-color: var(--neon-pink);
+    background-color: rgba(255,0,255,0.05); /* Subtle pink tint for review items */
+}
+#reviews-content .list-item p { /* Review text itself */
+    font-style: italic; color: #ddd; /* Lighter review text */
+    line-height: 1.5;
+}
+#reviews-content .list-item p::before { /* Quote style */
+    content: '"';
+    margin-right: 0.2em;
+    color: var(--neon-pink);
+}
+#reviews-content .list-item p::after {
+    content: '"';
+    margin-left: 0.2em;
+    color: var(--neon-pink);
+}
+
+
+/* --- Tutorial Modal --- */
+#tutorial-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.92); /* Slightly darker overlay */
+    display: none; /* Hidden by default, JS adds .visible */
+    justify-content: center; align-items: center;
+    z-index: 1000; padding: 1.5rem; box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.35s ease-in-out; /* Smoother transition */
+}
+#tutorial-modal.visible { display: flex; opacity: 1; }
+
+#tutorial-content {
+    background-color: var(--light-purple); border: 3px solid var(--neon-pink);
+    box-shadow: 0 0 15px var(--neon-pink), 0 0 30px var(--neon-pink); /* Enhanced glow */
+    padding: 2.5rem; /* Increased padding */ border-radius: 20px; /* More rounded */
+    max-width: 650px; /* Slightly wider */
+    text-align: left; /* Align text left for readability of list */
+    font-size: 0.9rem; line-height: 1.7; /* Improved readability */
+}
+#tutorial-content h2 {
+    color: var(--neon-pink); text-shadow: var(--text-glow-pink);
+    margin-bottom: 2rem; font-size: 1.6rem; /* Larger */
+    text-align: center; /* Center title */
+}
+#tutorial-content p { margin-bottom: 1.2rem; }
+#tutorial-content ul { list-style: none; padding-left: 1rem; margin-bottom: 1.5rem; }
+#tutorial-content ul li { margin-bottom: 0.6rem; position: relative; padding-left: 1.2rem; }
+#tutorial-content ul li::before {
+    content: ">>"; /* Double arrow for emphasis */
+    position: absolute; left: 0;
+    color: var(--neon-green);
+    font-size: 0.8em;
+}
+#start-game-btn {
+    font-family: 'Press Start 2P', cursive; background-color: var(--neon-green);
+    color: var(--dark-bg); border: 2px solid var(--neon-green);
+    padding: 0.9rem 1.8rem; /* Larger button */ border-radius: 10px;
+    cursor: pointer; transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 8px var(--neon-green), 0 0 15px var(--neon-green); /* Enhanced glow */
+    font-size: 1.1rem; /* Larger text */ margin-top: 2rem;
+    display: block; /* Make it block to center easily */
+    margin-left: auto; margin-right: auto; /* Center the button */
+}
+#start-game-btn:hover {
+    background-color: var(--dark-bg); color: var(--neon-green);
+    transform: scale(1.05);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+    html { font-size: 13px; } /* Slightly adjust base for medium screens */
+    #game-wrapper { gap: 1rem; }
+    #game-container { flex-direction: column; padding: 1rem; gap: 1rem; }
+    #left-panel, #middle-panel, #right-panel { min-width: unset; width: 100%; flex-basis: auto; }
+    #right-panel { order: 3; }
+    .tab-content { position: static; max-height: 280px; margin-bottom: 1rem; } /* Increased max-height */
+    #tab-content-area { min-height: unset; }
+    #header-area { font-size: 0.85rem; padding: 0.6rem 1.2rem; }
+    #open-close-sign { padding: 0.4rem 0.8rem; }
+    #main-title { font-size: 1.8rem; }
+    h2 { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 12px; }
+    body { padding: 0.8rem; }
+    #game-wrapper { max-width: 100%; } /* Ensure it doesn't overflow */
+    #main-title { font-size: 1.4rem; }
+    h2 { font-size: 1.1rem; }
+    h3 { font-size: 0.9rem; }
+    #header-area { font-size: 0.75rem; padding: 0.5rem 0.8rem; gap: 0.5rem; }
+    #open-close-sign { padding: 0.3rem 0.6rem; font-size: 0.7rem;}
+
+    #left-panel, #middle-panel, #right-panel { padding: 0.8rem; border-radius: 10px; }
+    #game-container { padding: 0.8rem; border-radius: 15px; }
+
+    #customer-icon { width: 60px; height: 60px; }
+    .ingredient-drag {
+        width: calc(var(--draggable-ingredient-width) * 0.8); /* Scale down */
+        height: calc(var(--draggable-ingredient-height) * 0.8);
+        font-size: 0.6rem;
+    }
+    #mixing-station { max-width: 240px; height: calc(var(--mixing-station-image-height) + 1.5rem); }
+    #mixer-image-visual { height: calc(var(--mixing-station-image-height) * 0.9); }
+    .mixed-ingredient { font-size: 0.65rem; padding: 3px 6px; }
+
+    .action-btn, .buy-btn { font-size: 0.7rem; padding: 0.5rem 0.7rem; border-radius: 6px; }
+    #actions { gap: 0.5rem; }
+
+    .tab-btn { font-size: 0.65rem; padding: 0.4rem 0.5rem; border-radius: 6px 6px 0 0; }
+    #tab-buttons { padding-bottom: 0.6rem; margin-bottom: 0.6rem; }
+    .list-item { font-size: 0.7rem; padding: 0.6rem; margin-bottom: 0.6rem; gap: 0.4rem;}
+    .list-item h4 {font-size: 0.85rem; gap: 0.5rem; padding-bottom: 0.4rem;}
+    .drink-icon { width: 26px; height: 26px; }
+
+    #chat-bubble { font-size: 0.75rem; padding: 0.6rem; min-height: 4em; }
+    #chat-bubble::before { border-width: 10px; }
+    #chat-bubble::after { border-width: 8px; }
+
+    #score, #money, #timer-display { font-size: 0.8rem; margin-bottom: 0.5rem; }
+    #skill-level-display, #upgrade-level-display { font-size: 0.7rem; }
+
+    #queue-section { padding: 0.6rem; }
+    #queue-list { max-height: 150px; }
+    .queue-customer-item { font-size: 0.7rem; padding: 0.5rem; gap: 0.5rem;}
+    .queue-customer-icon { width: 28px; height: 28px; }
+    .queue-bio-btn, .queue-ask-btn { font-size: 0.6rem; padding: 0.2rem 0.4rem; }
+
+    #tutorial-content { padding: 1.5rem; font-size: 0.8rem; line-height: 1.6;}
+    #tutorial-content h2 {font-size: 1.3rem; margin-bottom: 1.5rem;}
+    #start-game-btn { font-size: 0.9rem; padding: 0.7rem 1.2rem;}
+}
